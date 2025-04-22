@@ -1,12 +1,31 @@
-# React + Vite
+# Mood Tracker App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application to track daily moods, feelings, and weather for each day. The app allows users to select a date, input mood, feelings, and notes, and stores them in `localStorage`. 
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React.js** - A JavaScript library for building user interfaces.
+- **Tailwind CSS** - A utility-first CSS framework for building responsive, modern UIs.
+- **LocalStorage** - To store mood, note, and weather data in the browser.
+- **JavaScript** - For handling the app's logic and interactions.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Add daily mood, note, and feelings.
+- Display weather information for the selected date.
+- View previously saved entries in a responsive, card-based layout.
+- Mobile-friendly design.
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js** (>= v14.0.0)
+- **npm** (Node Package Manager)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/mood-tracker-app.git
+2. Live Link : https://cheerful-toffee-1d6e46.netlify.app/
