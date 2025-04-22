@@ -9,7 +9,7 @@ const CalendarComponent = ({ onCalendarChange }) => {
   // When the date changes, update the state and notify the parent
   const handleDateChange = (newDate) => {
     setValue(newDate);
-    onCalendarChange(newDate); // Pass the new date back to the parent component
+    if (onCalendarChange) onCalendarChange(newDate); // Ensure the parent callback exists
   };
 
   return (
@@ -18,15 +18,17 @@ const CalendarComponent = ({ onCalendarChange }) => {
         📅 Your Mood Calendar
       </h2>
       <div className="calendar-wrapper rounded-lg overflow-hidden">
-        <Calendar 
-          onChange={handleDateChange} 
-          value={value} 
-          className="dark:bg-gray-800 dark:text-white" 
+        <Calendar
+          onChange={handleDateChange}
+          value={value}
+          className="dark:bg-gray-800 dark:text-white"
         />
       </div>
       <p className="mt-6 text-center text-lg font-medium text-gray-700 dark:text-gray-300">
         🗓️ Selected Date:{" "}
-        <span className="text-purple-700 dark:text-purple-400 font-bold">{value.toDateString()}</span>
+        <span className="text-purple-700 dark:text-purple-400 font-bold">
+          {value.toDateString()}
+        </span>
       </p>
     </div>
   );

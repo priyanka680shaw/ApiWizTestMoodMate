@@ -25,12 +25,12 @@ const Header = () => {
         </h1>
 
         <div className="flex gap-6 items-center text-3xl">
-          <div className="relative cursor-pointer hover:scale-110 transition-transform duration-300">
+          {/* <div className="relative cursor-pointer hover:scale-110 transition-transform duration-300">
             <span role="img" aria-label="diary">📔</span>
             <span className="absolute -top-2 -right-2 bg-red-600 text-white text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full shadow-md">
               8
             </span>
-          </div>
+          </div> */}
 
           <span
             onClick={toggleTheme}

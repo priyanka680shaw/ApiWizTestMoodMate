@@ -6,40 +6,34 @@ import WeatherInfo from "../components/WeatherInfo";
 import Cards from "../components/Cards";
 
 const Home = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [note, setNote] = useState(null);
+  const [selectedDate, setSelectedDate] = useState({ day: "", month: "" , year : ""});
+  const [note, setNote] = useState({ note: "", mood: "", felling: "" });
   const [weatherData, setWeatherData] = useState(null);
 
+  // Load weather data when it changes
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("moodTrackerData")) || {};
-    setSelectedDate(storedData.selectedDate || null);
-    setNote(storedData.note || null);
-    setWeatherData(storedData.weatherData || null);
-  }, []);
-
-  useEffect(() => {
-    if (selectedDate && note && weatherData) {
+    // Check if all required data is available
+    if (selectedDate.day && selectedDate.month && note.note && note.mood && weatherData) {
       const newEntry = {
-        date: selectedDate,
+        date: selectedDate.day,
+        month: selectedDate.month,
+        year: selectedDate.year,
         note: note.note,
         mood: note.mood,
         feeling: note.felling,
-        weather: {
-          temp: weatherData.temp,
-          condition: weatherData.condition,
-        },
+        weather: weatherData.temp,
       };
 
-      const existingNotes = JSON.parse(localStorage.getItem("notes")) || [];
-      const updatedNotes = [...existingNotes, newEntry];
-      localStorage.setItem("notes", JSON.stringify(updatedNotes));
+      // Retrieve existing entries from localStorage, or initialize an empty array
+      const existingEntries = JSON.parse(localStorage.getItem("moodTrackerEntries")) || [];
 
-      const currentData = {
-        selectedDate,
-        note,
-        weatherData,
-      };
-      localStorage.setItem("moodTrackerData", JSON.stringify(currentData));
+      // Append the new entry to the existing entries
+      existingEntries.push(newEntry);
+
+      // Save the updated entries array back to localStorage
+      localStorage.setItem("moodTrackerEntries", JSON.stringify(existingEntries));
+
+      console.log("Data saved to localStorage:", newEntry);
     }
   }, [selectedDate, note, weatherData]);
 
@@ -57,12 +51,16 @@ const Home = () => {
   };
 
   const handleNoteChange = (noteText) => {
-    const simplified = {
-      note: noteText.note,
-      mood: noteText.mood.emoji,
-      felling: noteText.mood.label,
-    };
-    setNote(simplified);
+    if (noteText && noteText.mood) {
+      const simplified = {
+        note: noteText.note || "",
+        mood: noteText.mood.emoji || "",
+        felling: noteText.mood.label || "",
+      };
+      setNote(simplified);
+    } else {
+      console.error("Invalid noteText", noteText);
+    }
   };
 
   return (
