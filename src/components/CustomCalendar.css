@@ -1,0 +1,26 @@
+ /* CustomCalendar.css */
+
+.react-calendar {
+    width: 100%;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    background-color: transparent;
+  }
+  
+  .react-calendar__tile {
+    border-radius: 12px;
+    padding: 10px 6px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .react-calendar__tile--active {
+    background: #a78bfa;
+    color: white;
+  }
+  
+  .react-calendar__tile:enabled:hover {
+    background: #fcd34d;
+    color: #111827;
+    transform: scale(1.05);
+  }
+  
