@@ -10,8 +10,7 @@ const CalendarComponent = ({ onCalendarChange }) => {
   const handleDateChange = (newDate) => {
     setValue(newDate);
     if (onCalendarChange) onCalendarChange(newDate); // Ensure the parent callback exists
-  };
-
+  }
   return (
     <div className="p-6 w-full max-w-md mx-auto bg-gradient-to-br from-pink-100 via-yellow-100 to-purple-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-700 rounded-3xl shadow-xl dark:text-white">
       <h2 className="text-2xl font-semibold text-center text-purple-800 dark:text-yellow-300 mb-5">

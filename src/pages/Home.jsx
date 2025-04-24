@@ -6,14 +6,22 @@ import WeatherInfo from "../components/WeatherInfo";
 import Cards from "../components/Cards";
 
 const Home = () => {
-  const [selectedDate, setSelectedDate] = useState({ day: "", month: "" , year : ""});
+  const [selectedDate, setSelectedDate] = useState({ day: "", month: "", year: "" });
   const [note, setNote] = useState({ note: "", mood: "", felling: "" });
   const [weatherData, setWeatherData] = useState(null);
+  const [displayCards, setDisplayCards] = useState(false);
+  const [dataLength, setDataLength] = useState("0");
+  const [entries, setEntries] = useState([]);
 
-  // Load weather data when it changes
+  // Load existing entries on mount
   useEffect(() => {
-    // Check if all required data is available
-    if (selectedDate.day && selectedDate.month && note.note && note.mood && weatherData) {
+    const stored = JSON.parse(localStorage.getItem("moodTrackerEntries")) || [];
+    setEntries(stored);
+  }, []);
+
+  // Save data to localStorage and update entries state
+  useEffect(() => {
+    if (selectedDate.day && selectedDate.month && note.note && note.mood) {
       const newEntry = {
         date: selectedDate.day,
         month: selectedDate.month,
@@ -21,21 +29,20 @@ const Home = () => {
         note: note.note,
         mood: note.mood,
         feeling: note.felling,
-        weather: weatherData.temp,
       };
 
-      // Retrieve existing entries from localStorage, or initialize an empty array
       const existingEntries = JSON.parse(localStorage.getItem("moodTrackerEntries")) || [];
-
-      // Append the new entry to the existing entries
-      existingEntries.push(newEntry);
-
-      // Save the updated entries array back to localStorage
-      localStorage.setItem("moodTrackerEntries", JSON.stringify(existingEntries));
-
+      const updatedEntries = [...existingEntries, newEntry];
+      localStorage.setItem("moodTrackerEntries", JSON.stringify(updatedEntries));
+      setEntries(updatedEntries); // Update state to reflect change in UI immediately
       console.log("Data saved to localStorage:", newEntry);
     }
   }, [selectedDate, note, weatherData]);
+
+  // Update count when entries change
+  useEffect(() => {
+    setDataLength(entries.length);
+  }, [entries]);
 
   const handleWeatherData = (data) => {
     setWeatherData(data);
@@ -66,7 +73,7 @@ const Home = () => {
   return (
     <div className="w-full min-h-screen bg-red-100 dark:bg-gray-900 transition-colors duration-500">
       {/* Header */}
-      <Header />
+      <Header setDisplayCards={setDisplayCards} dataLength={dataLength} />
 
       {/* Main Content */}
       <div className="flex flex-col items-center justify-start p-4">
@@ -86,8 +93,8 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Cards */}
-      <Cards />
+      {/* Cards Section */}
+      <Cards showCards={displayCards} entries={entries} />
     </div>
   );
 };
