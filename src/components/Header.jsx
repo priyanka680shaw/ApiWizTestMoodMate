@@ -19,7 +19,7 @@ const Header = ({setDisplayCards , dataLength}) => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-full z-50 px-6 py-6 bg-gradient-to-r from-yellow-200 to-purple-300 dark:from-gray-800 dark:to-gray-900 shadow-md flex justify-between items-center rounded-b-2xl transition-all duration-500">
+      <div className=" fixed top-0 left-0 w-full z-50 px-6 py-6 bg-gradient-to-r from-yellow-200 to-purple-300 dark:from-gray-800 dark:to-gray-900 shadow-md flex justify-between items-center rounded-b-2xl transition-all duration-500">
         <h1 className="text-3xl font-extrabold text-gray-800 dark:text-white sm:text-4xl tracking-wide drop-shadow-lg">
           🌈 MoodMate <span className="text-purple-600 dark:text-yellow-300">🌦️</span>
         </h1>
@@ -31,7 +31,6 @@ const Header = ({setDisplayCards , dataLength}) => {
               {dataLength}
             </span>
           </div>
-
           <span
             onClick={toggleTheme}
             className="cursor-pointer hover:scale-110 transition-transform duration-300"
@@ -40,7 +39,7 @@ const Header = ({setDisplayCards , dataLength}) => {
           >
             {isDarkMode ? '🌙' : '🌞'}
           </span>
-        </div>
+        </div>   
       </div>
 
       <div className="h-28"></div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Cards = ({ showCards, entries }) => {
+const Cards = ({ showCards, entries , onDelete}) => {
   console.log(entries)
   return (
     <div
@@ -8,10 +8,14 @@ const Cards = ({ showCards, entries }) => {
         showCards ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      <div className="w-full max-w-4xl mx-auto p-4">
-        <h2 className="text-xl font-semibold text-center mb-4 text-gray-800 dark:text-white">
+
+<div className="relative mb-6">
+        <h2 className="text-xl font-semibold text-center mb-4 text-gray-800 dark:text-white fixed top-0 ">
           Your Mood Tracker Entries
         </h2>
+        </div>
+      <div className="w-full max-w-4xl mx-auto p-4">
+       
         <div className="space-y-4">
           {entries.length > 0 ? (
             entries.map((entry, index) => (
@@ -30,6 +34,9 @@ const Cards = ({ showCards, entries }) => {
                     </span>
                     {entry.weather ? `${entry.weather}°C` : "No weather data"}
                   </p>
+                  <button onClick={()=>onDelete(index)}>
+                    ⛔
+                  </button>
                 </div>
 
                 {/* Note, Mood, and Feeling Row */}

@@ -30,7 +30,7 @@ const WeatherInfo = ({ onWeatherData }) => {
   }, []); // Empty dependency array means this will run only once
 
   return (
-    <div className="max-w-xs mx-auto mt-6 p-6 bg-gradient-to-br from-yellow-100 to-purple-200 dark:from-gray-800 dark:to-gray-900 dark:text-white rounded-xl shadow-lg text-center transition-all duration-500">
+    <div className="max-w-xs mx-auto mt-6 px-4 py-2 bg-gradient-to-br from-yellow-100 to-purple-200 dark:from-gray-800 dark:to-gray-900 dark:text-white rounded-xl shadow-lg text-center transition-all duration-500">
       {weather ? (
         <>
           <h3 className="text-xl font-bold text-yellow-800 dark:text-yellow-300 mb-2">{weather.name}</h3>

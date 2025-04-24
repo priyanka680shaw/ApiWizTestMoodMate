@@ -4,6 +4,7 @@ import CalendarView from "../components/CalenderView";
 import Header from "../components/Header";
 import WeatherInfo from "../components/WeatherInfo";
 import Cards from "../components/Cards";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const [selectedDate, setSelectedDate] = useState({ day: "", month: "", year: "" });
@@ -36,6 +37,7 @@ const Home = () => {
       localStorage.setItem("moodTrackerEntries", JSON.stringify(updatedEntries));
       setEntries(updatedEntries); // Update state to reflect change in UI immediately
       console.log("Data saved to localStorage:", newEntry);
+      toast.success("note added successfully !")
     }
   }, [selectedDate, note, weatherData]);
 
@@ -68,17 +70,24 @@ const Home = () => {
     } else {
       console.error("Invalid noteText", noteText);
     }
-  };
+  }; 
 
+  //handle the deleteEnter
+  const handleDeleteEnter = (idxToDelete)=>{
+      const updateEnteries = entries.filter((data , idx)=> idx !== idxToDelete)
+      setEntries(updateEnteries)
+      localStorage.setItem("moodTrackerEntries" , JSON.stringify(updateEnteries))
+      toast.error("Entry deleted successfully!");
+  }
   return (
-    <div className="w-full min-h-screen bg-red-100 dark:bg-gray-900 transition-colors duration-500">
+    <div className="w-full min-h-screen bg-red-100 dark:bg-gray-900 transition-colors duration-500 ">
       {/* Header */}
       <Header setDisplayCards={setDisplayCards} dataLength={dataLength} />
 
       {/* Main Content */}
-      <div className="flex flex-col items-center justify-start p-4">
+      <div className="flex flex-col items-center justify-start px-4">
         {/* Weather Info */}
-        <div className="mb-4 w-full max-w-4xl">
+        <div className="mb-2 w-full max-w-4xl">
           <WeatherInfo onWeatherData={handleWeatherData} />
         </div>
 
@@ -94,7 +103,7 @@ const Home = () => {
       </div>
 
       {/* Cards Section */}
-      <Cards showCards={displayCards} entries={entries} />
+      <Cards showCards={displayCards} entries={entries} onDelete = {handleDeleteEnter}/>
     </div>
   );
 };

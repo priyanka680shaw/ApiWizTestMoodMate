@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { toast } from "react-toastify";
 const moods = [
   { emoji: "😊", label: "Happy" },
   { emoji: "😐", label: "Neutral" },
@@ -19,7 +19,7 @@ const EntryForm = ({ onSave }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!selectedMood || !note.trim()) {
-      alert("Please select a mood and write a note");
+      toast.success("Your mood has been saved!");
       return;
     }
     const entry = {
